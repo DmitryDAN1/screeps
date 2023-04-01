@@ -1,4 +1,4 @@
-const harvestersController = require('creeps/harvestersController')
+const harvestersController = require('harvestersController')
 
 function creepsController() {
     harvestersController()
