@@ -1,22 +1,19 @@
-// Spawns
-let mainSpawn = Game.spawns.MainSpawn
+const Config = require('config')
 
-// Limits
-let harvestersLimit = 1
-
-// Roles
-let HARVESTER = 'harvester'
-
-export function spawnController() {
+function spawnController() {
     var harvestersCount = 0
-    for (var creepId in Game.creeps) {
-        let creep = Game.creeps[creepId]
-        creep.memory.role === HARVESTER && harvestersCount++
+    for (creepId in Game.creeps) {
+        const creep = Game.creeps[creepId]
+        creep.memory.role === Config.roles.HARVESTER && harvestersCount++
     }
 
-    if (harvestersCount < harvestersLimit) {
-        mainSpawn.spawnCreep([CARRY, WORK, MOVE, MOVE], `Harveseter#${harvestersCount}`, {
-            role: HARVESTER
+    if (harvestersCount < Config.limits.harvesters) {
+        Config.spawns.main.spawnCreep(Config.creeps.HARVESTER, `Harvester#${harvestersCount}`, {
+            role: Config.roles.HARVESTER
         })
     }
+}
+
+module.exports = {
+    invoke: spawnController
 }

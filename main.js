@@ -1,5 +1,7 @@
-const {spawnController} = require("./spawnController");
+const SpawnController = require('spawnController')
+const CreepsController = require('creepsController')
 
 module.exports.loop = function () {
-    spawnController()
+    SpawnController.invoke()
+    CreepsController.invoke()
 }
